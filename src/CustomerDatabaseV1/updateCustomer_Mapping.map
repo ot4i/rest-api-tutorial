@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0">
+    <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="error" nillable="true" type="xsd:string"/>
+    <xsd:element name="address" nillable="true" type="xsd:string"/>
+    <xsd:element name="lastname" nillable="true" type="xsd:string"/>
+    <xsd:element name="firstname" nillable="true" type="xsd:string"/>
+    <xsd:element name="customerId" type="xsd:string"/>
+</xsd:schema>
+]]></inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var2"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var1"/>
+    <imports>
+        <import kind="java" location="CustomerDatabase" namespace="xalan://CustomerDatabase"/>
+    </imports>
+    <namespaces>
+        <namespace kind="supplement" prefix="io" uri="http://www.ibm.com/iib/msl/json"/>
+        <namespace kind="extension" prefix="CustomerDatabase" uri="xalan://CustomerDatabase"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="updateCustomer_Mapping">
+        <input namespace="http://www.ibm.com/iib/msl/json" path="$var/mb:msg(JSON,assembly,JSON,LocalEnvironment)" var="ComIbmMessageAssembly_JSON">
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}JSONObject" ref="var"/>
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/LocalEnvironment/REST/Input/Parameters/any" qualifier="customerId" ref="var2"/>
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/any" qualifier="firstname" ref="var2"/>
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/any" qualifier="lastname" ref="var2"/>
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/any" qualifier="address" ref="var2"/>
+        </input>
+        <output namespace="http://www.ibm.com/iib/msl/json" path="$var1/mb:msg(JSON,assembly,JSON,LocalEnvironment)" var="ComIbmMessageAssembly_JSON1">
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON1/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}JSONObject" ref="var1"/>
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON1/JSON/spath('Data',2)/any" qualifier="error" ref="var2"/>
+        </output>
+        <condition>
+            <if>
+                <input path="$ComIbmMessageAssembly_JSON/." var="MessageAssembly"/>
+                <output path="$ComIbmMessageAssembly_JSON1/."/>
+                <test lang="xpath">CustomerDatabase:customerExists($MessageAssembly/LocalEnvironment/REST/Input/Parameters/customerId)</test>
+                <customFunction lang="java" ref="CustomerDatabase:updateCustomer">
+                    <input namespace="http://www.ibm.com/iib/msl/json" path="$var/mb:msg(JSON,assembly,JSON,LocalEnvironment)" var="ComIbmMessageAssembly_JSON"/>
+                    <output path="JSON/spath('Data',2)"/>
+                    <param name="id" value="$MessageAssembly/LocalEnvironment/REST/Input/Parameters/customerId"/>
+                    <param name="firstname" value="$MessageAssembly/JSON/Data/firstname"/>
+                    <param name="lastname" value="$MessageAssembly/JSON/Data/lastname"/>
+                    <param name="address" value="$MessageAssembly/JSON/Data/address"/>
+                </customFunction>
+            </if>
+            <else>
+                <output path="$ComIbmMessageAssembly_JSON1/."/>
+                <assign value="404">
+                    <output path="LocalEnvironment/Destination/HTTP/ReplyStatusCode"/>
+                </assign>
+                <assign value="A customer with the specified ID does not exist in the database.">
+                    <output path="JSON/spath('Data',2)/error"/>
+                </assign>
+            </else>
+        </condition>
+    </mappingDeclaration>
+</mappingRoot>
