@@ -166,7 +166,7 @@
                 "details":
                   [
 					{ 
-                      "details":"Click <span class='application'>Deploy</span> button or drag and drop the <span class='application'>CustomerDatabaseV1</span> application on the integration server to deploy the REST API."
+                      "details":"Click <span class='application'>Deploy</span> or drag and drop the <span class='application'>CustomerDatabaseV1</span> application on the integration server to deploy the REST API."
                     },
                     { 
                       "details":"Check that the application deployed with no errors. Your REST API HTTP endpoints should be up and running, waiting for HTTP REST requests to arrive."
