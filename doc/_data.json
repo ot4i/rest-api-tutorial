@@ -285,7 +285,7 @@
                       "details":"For the input object, specify the customer details in the following format:<br/><code>{<br/>\"firstname\" : \"Lyle\",<br/>\"lastname\" : \"Longino\",<br/>\"address\" : \"123 New Address, New Town\"<br/>}</code><br/> Note: You must specify all fields in the customer record, not just the field that you want to update."
                     },
                     { 
-                      "details":"Select the GET method, and initiate the call. You should see the following response:<br/><span class='msgph'>An existing customer with ID <span class='varname'>customerID</span> was successfully updated in the database.</span>."
+                      "details":"Select the PUT method, and initiate the call. You should see the following response:<br/><span class='msgph'>An existing customer with ID <span class='varname'>customerID</span> was successfully updated in the database.</span>."
                     }
                   ]
                 }
