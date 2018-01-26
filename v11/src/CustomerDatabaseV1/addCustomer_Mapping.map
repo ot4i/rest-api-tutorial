@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0">
+    <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="address" nillable="true" type="xsd:string"/>
+    <xsd:element name="lastname" nillable="true" type="xsd:string"/>
+    <xsd:element name="firstname" nillable="true" type="xsd:string"/>
+</xsd:schema>
+]]></inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var2"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var1"/>
+    <imports>
+        <import kind="java" location="CustomerDatabase" namespace="xalan://CustomerDatabase"/>
+    </imports>
+    <namespaces>
+        <namespace kind="supplement" prefix="io" uri="http://www.ibm.com/iib/msl/json"/>
+        <namespace kind="extension" prefix="CustomerDatabase" uri="xalan://CustomerDatabase"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="addCustomer_Mapping">
+        <input namespace="http://www.ibm.com/iib/msl/json" path="$var/mb:msg(JSON,assembly,JSON)" var="ComIbmMessageAssembly_JSON">
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}JSONObject" ref="var"/>
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/any" qualifier="firstname" ref="var2"/>
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/any" qualifier="lastname" ref="var2"/>
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/any" qualifier="address" ref="var2"/>
+        </input>
+        <output namespace="http://www.ibm.com/iib/msl/json" path="$var1/mb:msg(JSON,assembly,JSON)" var="ComIbmMessageAssembly_JSON1">
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON1/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}JSONObject" ref="var1"/>
+        </output>
+        <customFunction lang="java" ref="CustomerDatabase:addCustomer">
+            <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)" var="Data"/>
+            <output path="$ComIbmMessageAssembly_JSON1/JSON/spath('Data',2)"/>
+            <param name="firstname" value="$Data/firstname"/>
+            <param name="lastname" value="$Data/lastname"/>
+            <param name="address" value="$Data/address"/>
+        </customFunction>
+    </mappingDeclaration>
+</mappingRoot>

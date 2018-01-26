@@ -1,0 +1,49 @@
+
+
+
+
+CREATE PROCEDURE getAllCustomers ( IN max INTEGER, INOUT output REFERENCE )
+LANGUAGE JAVA
+EXTERNAL NAME "CustomerDatabase.getAllCustomers";
+
+CREATE COMPUTE MODULE getAllCustomers_Compute
+
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Copy the headers over, but do not copy any message body.
+		CALL CopyMessageHeaders();
+		-- Process the 'max' parameter from the inbound request.
+		-- If it is not specified, then default to -1 (all of the customers).
+		DECLARE max INTEGER -1;
+		IF FIELDTYPE(InputLocalEnvironment.REST.Input.Parameters.max) IS NOT NULL THEN
+			-- Set up a handler for cast exceptions, and then attempt to cast the parameter to an integer.
+			DECLARE EXIT HANDLER FOR SQLSTATE LIKE '%'
+			BEGIN
+				SET OutputLocalEnvironment.Destination.HTTP.ReplyStatusCode = 400;
+				SET OutputRoot.JSON.Data.error = 'The value provided for the ''max'' parameter is not a valid integer.';
+				RETURN TRUE;
+			END;
+			SET max = CAST(InputLocalEnvironment.REST.Input.Parameters.max AS INTEGER);
+
+		END IF;
+		-- Create a top level JSON array that will hold the customer records.
+		CREATE LASTCHILD OF OutputRoot DOMAIN('JSON');
+		SET OutputRoot.JSON.Data TYPE = JSON.Array;
+		DECLARE output REFERENCE TO OutputRoot.JSON.Data;
+		-- Retrieve the customer records by calling Java code.
+		CALL getAllCustomers(max, output);
+		RETURN TRUE;
+
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+END MODULE;

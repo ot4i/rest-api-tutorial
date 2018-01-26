@@ -1,0 +1,148 @@
+{
+  "swagger" : "2.0",
+  "basePath" : "/customerdb/v1",
+  "info" : {
+    "title" : "Customer Database",
+    "description" : "This is the customer database sample Swagger document included with IBM Integration Bus",
+    "version" : "1.0.0"
+  },
+  "definitions" : {
+    "Customer" : {
+      "properties" : {
+        "id" : {
+          "type" : "integer"
+        },
+        "firstname" : {
+          "type" : "string"
+        },
+        "lastname" : {
+          "type" : "string"
+        },
+        "address" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "firstname", "lastname", "address" ]
+    }
+  },
+  "tags" : [ {
+    "name" : "customers",
+    "description" : "Operations on customers in the customer database"
+  } ],
+  "paths" : {
+    "/customers" : {
+      "get" : {
+        "operationId" : "getAllCustomers",
+        "summary" : "Get all customers from the database",
+        "parameters" : [ {
+          "name" : "max",
+          "in" : "query",
+          "description" : "Maximum number of customers to get from the database",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "An array of customers from the database",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Customer"
+              }
+            }
+          }
+        },
+        "tags" : [ "customers" ]
+      },
+      "post" : {
+        "operationId" : "addCustomer",
+        "summary" : "Add a customer to the database",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "The customer to add to the database",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Customer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "If the customer was successfully added to the database"
+          }
+        },
+        "tags" : [ "customers" ]
+      }
+    },
+    "/customers/{customerId}" : {
+      "get" : {
+        "operationId" : "getCustomer",
+        "summary" : "Get a specified customer from the database",
+        "parameters" : [ {
+          "name" : "customerId",
+          "in" : "path",
+          "description" : "The ID of the customer to get from the database",
+          "required" : true,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The specified customer from the database",
+            "schema" : {
+              "$ref" : "#/definitions/Customer"
+            }
+          }
+        },
+        "tags" : [ "customers" ]
+      },
+      "delete" : {
+        "operationId" : "deleteCustomer",
+        "summary" : "Delete a specified customer from the database",
+        "parameters" : [ {
+          "name" : "customerId",
+          "in" : "path",
+          "description" : "The ID of the customer to delete from the database",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "name" : "Authorization",
+          "in" : "header",
+          "description" : "Provide the authorization key that permits the customer to be deleted from the database",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "If the customer was successfully deleted from the database"
+          }
+        },
+        "tags" : [ "customers" ]
+      },
+      "put" : {
+        "operationId" : "updateCustomer",
+        "summary" : "Update a customer in the database",
+        "parameters" : [ {
+          "name" : "customerId",
+          "in" : "path",
+          "description" : "The ID of the customer to update in the database",
+          "required" : true,
+          "type" : "integer"
+        }, {
+          "name" : "body",
+          "in" : "body",
+          "description" : "The customer to update in the database",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Customer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "If the customer was successfully updated in the database"
+          }
+        },
+        "tags" : [ "customers" ]
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0">
+    <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <xsd:element name="error" nillable="true" type="xsd:string"/>
+    <xsd:element name="customerId" type="xsd:string"/>
+</xsd:schema>
+]]></inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/BlobMessage.xsd" var="var2"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var1"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var"/>
+    <imports>
+        <import kind="java" location="CustomerDatabase" namespace="xalan://CustomerDatabase"/>
+    </imports>
+    <namespaces>
+        <namespace kind="supplement" prefix="out" uri="http://www.ibm.com/iib/msl/json"/>
+        <namespace kind="extension" prefix="CustomerDatabase" uri="xalan://CustomerDatabase"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="getCustomer_Mapping">
+        <input path="$var2/mb:msg(BLOB,assembly,BLOB,LocalEnvironment)" var="ComIbmMessageAssembly_BLOB">
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_BLOB/LocalEnvironment/REST/Input/Parameters/any" qualifier="customerId" ref="var1"/>
+        </input>
+        <output namespace="http://www.ibm.com/iib/msl/json" path="$var/mb:msg(JSON,assembly,JSON,LocalEnvironment)" var="ComIbmMessageAssembly_JSON">
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}JSONObject" ref="var"/>
+            <cast castType="userDefined" path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/any" qualifier="error" ref="var1"/>
+        </output>
+        <condition>
+            <if>
+                <documentation>	</documentation>
+                <input path="$ComIbmMessageAssembly_BLOB/LocalEnvironment/REST/Input/Parameters/customerId" var="customerId"/>
+                <output path="$ComIbmMessageAssembly_JSON/."/>
+                <test lang="xpath">CustomerDatabase:customerExists($customerId)</test>
+                <customFunction lang="java" ref="CustomerDatabase:getCustomer">
+                    <input path="$customerId/." var="customerId1"/>
+                    <output path="JSON/spath('Data',2)" var="Data"/>
+                    <param name="id" value="$customerId1"/>
+                </customFunction>
+            </if>
+            <else>
+                <output path="$ComIbmMessageAssembly_JSON/."/>
+                <assign value="404">
+                    <output path="LocalEnvironment/Destination/HTTP/ReplyStatusCode"/>
+                </assign>
+                <assign value="A customer with the specified ID does not exist in the database.">
+                    <output path="JSON/spath('Data',2)/error"/>
+                </assign>
+            </else>
+        </condition>
+    </mappingDeclaration>
+</mappingRoot>
