@@ -15,14 +15,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<meta name="copyright" content="Copyright IBM Corporation 2014" />
-		<meta name="abstract" content="IBM Integration Bus V10 Tutorial">
+		<meta name="abstract" content="IBM App Connect Enterprise V11 Tutorial">
 		<meta name="author" content="IBM">
-		<meta name="description" content="IBM Integration Bus V10 Tutorial">
+		<meta name="description" content="IBM App Connect Enterprise V11 Tutorial">
 		<meta name="keywords" content="keywords" > 
 		<meta name="robots" content="index,follow">
-		<meta name="source" content="IBM Integration Bus V10 Tutorial" /> 
+		<meta name="source" content="IBM App Connect Enterprise V11 Tutorial" /> 
 		
-		<title>IBM Integration Bus V10 Tutorial</title>
+		<title>IBM App Connect Enterprise V11 Tutorial</title>
 
     	<link rel="stylesheet" href="https://ot4i.github.io/iib-tutorials/css/main.css" />
 		<link rel="stylesheet" href="https://ot4i.github.io/iib-tutorials/css/app.css" />
@@ -43,7 +43,7 @@
 	</div>
 	<div class="row">
 	  <div class="small-9 medium-9 large-9 columns">
-	    <h4 class="title">Manage a set of records with IBM Integration Bus REST API services <action><div class="small radius button" id="stepsViewDetails" onclick="viewDetails()"> View Details</div> </action></h4>
+	    <h4 class="title">Using a REST API to manage a set of records <action><button class="small radius button" tabindex="0" id="stepsViewDetails" onclick="viewDetails()"> View Details</button> </action></h4>
 	  </div>
 	  <div class="small-3 medium-3 large-3 columns">
 		<a href="javascript:;" onclick="openHelpSystem('/com.ibm.etools.msgbroker.helphome.doc/help_home_msgbroker.htm')" class="small right helplink">IBM Knowledge Center</a> 
@@ -52,11 +52,11 @@
 	<hr>
 	<div class="row">
 		<div class="small-10 medium-10 large-10 columns">
-		<h5> Learn how to use an IBM Integration Bus REST API service to manage a set of records. </h5>
+		<h5> Learn how to use a REST API with a simple example managing a set of records. </h5>
 		</div>
 		<div class="small-2 medium-2 large-2 columns">
-			<div class="small radius button right" id="backToGallery" onclick="backToGallery()"> Back To Gallery
-			</div>
+			<button class="small radius button right" tabindex="0" id="backToGallery" onclick="backToGallery()"> Back To Gallery
+			</button>
 		</div>
 	</div>
 	<div class="row">          
@@ -123,6 +123,30 @@
 						  	<h4>Deploy the REST API</h4>
 						    
 						    
+								<p> Create an integration node by completing the following steps: </p>
+								
+								
+									
+									<ol>
+									
+									
+										<li> Start a console window, and create an integration node by typing the following command:<br><code><span class="cmdname">mqsicreatebroker</span> <span class="varname">TESTNODE</span></code>
+										
+										</li>
+									
+										<li> Start the integration node by typing the following command:<br><code><span class="cmdname">mqsistart</span> <span class="varname">TESTNODE</span></code>
+										
+										</li>
+									
+										<li> Create an integration server associated with the integration node by typing the following command:<br><code><span class="cmdname">mqsicreateexecutiongroup</span> <span class="varname">TESTNODE</span> -e <span class="varname">default</span></code>
+										
+										</li>
+									
+									
+									</ol>
+									
+								
+							
 								<p> Deploy the <span class="application">CustomerDatabaseV1</span> REST API service by completing the following steps: </p>
 								
 								
@@ -130,7 +154,7 @@
 									<ol>
 									
 									
-										<li> Click <span class="uicontrol">Deploy</span> or drag and drop the <span class="application">CustomerDatabaseV1</span> application on the integration server to deploy the REST API.
+										<li> Click <span class="application">Deploy</span> or drag and drop the <span class="application">CustomerDatabaseV1</span> application on the integration server to deploy the REST API.
 										
 										</li>
 									
@@ -138,7 +162,7 @@
 										
 										</li>
 									
-										<li> Find and record the URL of the REST API by selecting the <span class="application">CustomerDatabaseV1</span> REST API in the <span class="uicontrol">Integration Nodes</span> view. The base URL for the deployed REST API service is displayed in the <span class="uicontrol">Properties</span> view. For example, <span class="userinput">https://localhost:7800/customerdb/v1</span>.
+										<li> Find and record the URL of the REST API by selecting the <span class="application">CustomerDatabaseV1</span> REST API in the <span class="uicontrol">Integration Nodes</span> view. The base URL for the deployed REST API service is displayed in the <span class="uicontrol">Properties</span> view. For example, <span class="userinput">http://localhost:7800/customerdb/v1</span>.
 										
 										</li>
 									
@@ -307,7 +331,7 @@
 									<ol>
 									
 									
-										<li> In the IBM Integration Toolkit, a REST API is created from a Swagger document. To see the Swagger document that was used to create this REST API, double-click the <span class="filepath">swagger.json</span> file under <span class="application">CustomerDatabaseV1/Other Resources</span> in the <span class="uicontrol">Application Development</span> view. The file is opened in a text editor.
+										<li> In the Toolkit, a REST API is created from a Swagger document. To see the Swagger document that was used to create this REST API, double-click the <span class="filepath">swagger.json</span> file under <span class="application">CustomerDatabaseV1/Other Resources</span> in the <span class="uicontrol">Application Development</span> view. The file is opened in a text editor.
 										
 										</li>
 									
