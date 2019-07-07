@@ -185,7 +185,7 @@
                 "details":
                   [
 					{ 
-                      "details":"Click <span class='application'>Deploy</span> or drag and drop the <span class='application'>CustomerDatabaseV1</span> application on the integration server to deploy the REST API."
+                      "details":"Drag and drop the <span class='application'>CustomerDatabaseV1</span> application on the integration server to deploy the REST API."
                     },
                     { 
                       "details":"Check that the application deployed with no errors. Your REST API HTTP endpoints should be up and running, waiting for HTTP REST requests to arrive."
@@ -212,18 +212,7 @@
 				"link":"com.ibm.etools.mft.doc/bi12016_.htm"
 				}
 			  ]
-		    },
-			"actions": 
-				{
-                    "title": "Prepare Actions",
-                    "details": 
-					[
-                        {
-                            "name": "Deploy",
-                            "method": "deployArtifacts()"
-                        }
-                    ]
-                }
+		    }
         },
         "run":
         {
@@ -387,19 +376,7 @@
 				"link":"com.ibm.etools.mft.doc/bc28410_.htm"
 				}
 			  ]
-		    },
-				"exits": 
-				{
-					"title": "Run Exits",
-					"details": 
-					[
-						{
-							"name": "Clean Up",
-							"description": "Clean up and remove any changes in your workspace made by the tutorial.",
-							"method": "cleanUp()"
-						}
-					]
-				}
+		    }
         } 
       }
     }
