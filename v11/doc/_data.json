@@ -31,8 +31,8 @@
   "tutorial": 
   { "_common":
     {
-      "name":"Manage a set of records with IBM Integration Bus REST API services",
-      "shortDescription":"Learn how to use an IBM Integration Bus REST API service to manage a set of records.",
+      "name":"Using a REST API to manage a set of records",
+      "shortDescription":"Learn how to use a REST API with a simple example managing a set of records.",
       "durationText":"This tutorial takes approximately",
       "durationTime":"5 minutes",
 	  "resourceToOpen":"CustomerDatabaseV1",
@@ -48,7 +48,7 @@
       "topicList":
       [
         {
-          "title":"IBM Integration Bus REST API."
+          "title":"IBM App Connect Enterprise REST API."
         },
         {
           "title":"Subflows."
@@ -77,7 +77,7 @@
           "sections":
           [
             {
-            "section":"IBM Integration Bus provides a specific REST API project for developing RESTful web service implementations. These services help you define and implement a RESTful service based on the existing Swagger document. These services, which can be invoked from other standard REST or HTTP clients, allow you to send REST requests and receive responses over HTTP. This tutorial shows a simple example where a REST API service implements several functions to query and manage a sample customer registry."},
+            "section":"IBM App Connect Enterprise provides a specific REST API project for developing RESTful web service implementations. These services help you define and implement a RESTful service based on the existing Swagger document. These services, which can be invoked from other standard REST or HTTP clients, allow you to send REST requests and receive responses over HTTP. This tutorial shows a simple example where a REST API service implements several functions to query and manage a sample customer registry."},
             {
             "section":"The REST API description allows you to view the RESTful interface that is defined in the imported Swagger document, and allows easy navigation between the REST API interface editor and the subflows that implement the interface operations. In this example, the REST API defines five operations. Each operation can be invoked by a unique combination of the URL path and HTTP method. An operation can make use of a JSON input object and URL parameters. The operations are implemented as subflows that use different transformation nodes. The nodes demonstrate how you can use ESQL, Java, or Graphical Mapping to process an incoming JSON message. The subflows also show you how to construct a response message that includes a JSON response object. You can also generate subflows to handle errors that might occur while processing the REST requests and responses."},
             {
@@ -158,6 +158,25 @@
             "heading":"Deploy the REST API",
             "sections":
             [
+			  {
+              "section":"Create an integration node by completing the following steps:",				
+                "steps":
+                {
+                "type":"ordered",
+                "details":
+                  [
+                    {
+                    "details":"Start a console window, and create an integration node by typing the following command:<br><code><span class='cmdname'>mqsicreatebroker</span> <span class='varname'>TESTNODE</span></code>"
+                    },
+					{
+                    "details":"Start the integration node by typing the following command:<br><code><span class='cmdname'>mqsistart</span> <span class='varname'>TESTNODE</span></code>"
+                    },
+                    {
+                    "details":"Create an integration server associated with the integration node by typing the following command:<br><code><span class='cmdname'>mqsicreateexecutiongroup</span> <span class='varname'>TESTNODE</span> -e <span class='varname'>default</span></code>"
+                    }
+                  ]
+                }
+              },				
               {
               "section":"Deploy the <span class='application'>CustomerDatabaseV1</span> REST API service by completing the following steps:", 
                 "steps":
@@ -317,7 +336,7 @@
                 "details":
                   [
                     {
-                      "details":"In the IBM Integration Toolkit, a REST API is created from a Swagger document. To see the Swagger document that was used to create this REST API, double-click the <span class='filepath'>swagger.json</span> file under <span class='application'>CustomerDatabaseV1/Other Resources</span> in the <span class='uicontrol'>Application Development</span> view. The file is opened in a text editor."
+                      "details":"In the Toolkit, a REST API is created from a Swagger document. To see the Swagger document that was used to create this REST API, double-click the <span class='filepath'>swagger.json</span> file under <span class='application'>CustomerDatabaseV1/Other Resources</span> in the <span class='uicontrol'>Application Development</span> view. The file is opened in a text editor."
                     },  
                     {
                       "details":"When you use the Toolkit to create a REST API from a Swagger document, a REST API description is created. From the <span class='application'>CustomerDatabaseV1</span> project, open the REST API Description for the REST API  (if it is not already open). Each URL path/HTTP Method combination is mapped to a logical operation name. From each operation, you can click a link to create a subflow where the operation functionality is defined."
