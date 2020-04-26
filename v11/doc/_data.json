@@ -39,7 +39,7 @@
             "helpLink": 
 			{
                 "text": "IBM Knowledge Center",
-                "link": "/com.ibm.etools.msgbroker.helphome.doc/help_home_msgbroker.htm"
+           		"link": "https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.ace.home.doc/help_home.htm"
             }
     },
     "pageDetails":
@@ -93,12 +93,14 @@
 			{
 			"title":"Knowledge Center link to ",
 			"description":"Developing integration solutions by using REST APIs",
-			"link":"com.ibm.etools.mft.doc/bi12016_.htm"
+			"link":"https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bi12016_.htm",
+			"type":"web"
 			},
                         {
 			"title":"Knowledge Center link to ",
 			"description":"Manipulating messages in the JSON domain",
-			"link":"com.ibm.etools.mft.doc/bc28410_.htm"
+			"link":"https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bc28410_.htm",
+			"type":"web"
 			}
 
 		  ]
@@ -133,7 +135,8 @@
 				{
 				"title":"Knowledge Center link to ",
 				"description":"Developing integration solutions by using REST APIs",
-				"link":"com.ibm.etools.mft.doc/bi12016_.htm"
+				"link":"https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bi12016_.htm",
+				"type":"web"
 				}
 			  ]
 		    },
@@ -209,7 +212,8 @@
 				{
 				"title":"Knowledge Center link to ",
 				"description":"Developing integration solutions by using REST APIs",
-				"link":"com.ibm.etools.mft.doc/bi12016_.htm"
+				"link":"https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bi12016_.htm",
+				"type":"web"
 				}
 			  ]
 		    }
@@ -368,12 +372,14 @@
 				{
 				"title":"Knowledge Center link to ",
 				"description":"Developing integration solutions by using REST APIs",
-				"link":"com.ibm.etools.mft.doc/bi12016_.htm"
+				"link":"https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bi12016_.htm",
+				"type":"web"
 				},
 				{
 				"title":"Knowledge Center link to ",
 				"description":"Manipulating messages in the JSON domain",
-				"link":"com.ibm.etools.mft.doc/bc28410_.htm"
+				"link":"https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bc28410_.htm",
+				"type":"web"
 				}
 			  ]
 		    }
