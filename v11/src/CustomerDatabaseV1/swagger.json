@@ -1,6 +1,10 @@
 {
   "swagger" : "2.0",
+  "host" : "localhost",
   "basePath" : "/customerdb/v1",
+  "schemes" : [
+     "http"
+  ],
   "info" : {
     "title" : "Customer Database",
     "description" : "This is the customer database sample Swagger document included with IBM Integration Bus",
