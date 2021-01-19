@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+ 
+	
+<!-- header::Start -->
+	<head>
+		<!-- Use Internet Explorer 9 Standards mode for Eclipse Browser Control - https://www.eclipse.org/swt/faq.php#browsernativeie and https://msdn.microsoft.com/en-us/library/jj676915%28v=vs.85%29.aspx -->
+  		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		
+		<!-- Next 2 http=equiv headers required to disable caching the Eclipse Browser Widget -->
+		<meta http-equiv="Pragma" content="no-cache">
+  		<meta http-equiv="Expires" content="-1">
+
+		<meta charset="UTF-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<meta name="copyright" content="Copyright IBM Corporation 2014" />
+		<meta name="abstract" content="IBM App Connect Enterprise V11 Tutorial">
+		<meta name="author" content="IBM">
+		<meta name="description" content="IBM App Connect Enterprise V11 Tutorial">
+		<meta name="keywords" content="keywords" > 
+		<meta name="robots" content="index,follow">
+		<meta name="source" content="IBM App Connect Enterprise V11 Tutorial" /> 
+		
+		<title>IBM App Connect Enterprise V11 Tutorial</title>
+
+    	<link rel="stylesheet" href="https://ot4i.github.io/iib-tutorials/css/main.css" />
+		<link rel="stylesheet" href="https://ot4i.github.io/iib-tutorials/css/app.css" />
+    	
+		<script src="https://ot4i.github.io/iib-tutorials/js/json2.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/js2java.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/js2java_steps.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/vendor/modernizr.js"></script>
+	</head>
+<!-- header::End -->
+<!-- body::Start -->
+		<body>
+    <!-- body content here -->
+  <div class="row">
+    <div class="small-12 medium-12 large-12 columns">
+      <p> </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-9 medium-9 large-9 columns">
+      <h4>Using a REST API to manage a set of records</h4>
+    </div>
+    <div class="small-3 medium-3 large-3 columns"> 
+      <!--a href="javascript:;" onclick="openHelpSystem('https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.ace.home.doc/help_home.htm');" class="small right helplink">IBM Knowledge Center</a-->
+    </div>
+  </div> 
+  <hr>
+  <div class="row">
+    <div class="small-12 medium-12 large-12 columns">
+      <h5> Learn how to use a REST API with a simple example managing a set of records. </h5>
+    </div>
+  </div>
+  <div class="row content-details">
+    <div class="small-6 medium-6 large-6 columns">
+      <div class="row">
+        <h5> OVERVIEW </h5>
+      </div>
+      <div class="row">
+      
+        
+        <p> IBM App Connect Enterprise provides a specific REST API project for developing RESTful web service implementations. These services help you define and implement a RESTful service based on the existing Swagger document. These services, which can be invoked from other standard REST or HTTP clients, allow you to send REST requests and receive responses over HTTP. This tutorial shows a simple example where a REST API service implements several functions to query and manage a sample customer registry. </p>
+      
+        <p> The REST API description allows you to view the RESTful interface that is defined in the imported Swagger document, and allows easy navigation between the REST API interface editor and the subflows that implement the interface operations. In this example, the REST API defines five operations. Each operation can be invoked by a unique combination of the URL path and HTTP method. An operation can make use of a JSON input object and URL parameters. The operations are implemented as subflows that use different transformation nodes. The nodes demonstrate how you can use ESQL, Java, or Graphical Mapping to process an incoming JSON message. The subflows also show you how to construct a response message that includes a JSON response object. You can also generate subflows to handle errors that might occur while processing the REST requests and responses. </p>
+      
+        <p> You will see how you can deploy and test the REST API on the integration node by using a REST client. As you run the example, you will see how the REST API is deployed as a single entity, which packages your solution. </p>
+      
+      </div>	  
+		<!-- help links do not work in details page for GA 
+        
+		<div class="row content-details">
+			<h4>Find out more</h4>
+			<ul>
+			
+				
+				
+				<li> <a href="javascript:;" onclick="openExternalBrowser('https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bi12016_.htm')" title="Knowledge Center link to  Developing integration solutions by using REST APIs">Developing integration solutions by using REST APIs</a> </li>
+					
+			
+				
+				
+				<li> <a href="javascript:;" onclick="openExternalBrowser('https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bc28410_.htm')" title="Knowledge Center link to  Manipulating messages in the JSON domain">Manipulating messages in the JSON domain</a> </li>
+					
+			
+			</ul>
+		</div>
+				  
+        -->
+        
+    </div><!-- End Columns -->
+    <div class="small-offset-1 small-5 medium-offset-1 medium-5 large-offset-1 large-5 columns">
+      <div class="row">
+        <div class="panel radius" style="margin:0px; margin-bottom:10px; padding:5px">
+          <div class="row">
+            <div class="small-2 medium-2 large-2 columns">
+              <img class="icon-image" src="https://ot4i.github.io/iib-tutorials/images/icons/ibmdesign/clock-time_128.png">
+            </div>
+            <div class="small-10 large-10 columns">
+              This tutorial takes approximately <b>5 minutes</b>.
+            </div>
+          </div>
+          <div class="row" style="margin-left: 1rem; text-align: center">
+            <action>
+              <button class="small radius button" tabindex="0" id="startTutorial" onclick="startTutorialFromDetailsScreen()"> Start Tutorial
+            </button>
+            </action>
+            <button class="small radius button" tabindex="0" id="backToGallery" onclick="backToGallery()"> Back To Gallery
+			</button>
+          </div>
+        </div>
+      </div>
+      <div class="row content-details">
+        <div class="small-6 medium-6 large-6 columns">
+          <h5> Tutorial Topics </h5>
+          <ul>
+            
+            
+              <li>IBM App Connect Enterprise REST API.</li>
+            
+              <li>Subflows.</li>
+            
+              <li>Transformation using graphical data mapping, Compute and Java Compute nodes.</li>
+            
+          </ul>
+        </div>
+        <div class="small-6 medium-6 large-6 columns">
+          <h5>Learning outcomes </h5>
+          <ul>
+          
+          
+            <li>Understand how a REST API is defined, implemented, deployed, and invoked.</li>
+          
+            <li>Learn how to implement REST API operations by using subflows.</li>
+          
+            <li>Review how Java Compute, Compute and Mapping nodes can handle messages based on JSON objects.</li>
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div></body>
+		<script src="https://ot4i.github.io/iib-tutorials/js/vendor/jquery.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/vendor/foundation.min.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/main.js"></script>
+	</body>
+<!-- body::End -->
+
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+ 
+	
+<!-- header::Start -->
+	<head>
+		<!-- Use Internet Explorer 9 Standards mode for Eclipse Browser Control - https://www.eclipse.org/swt/faq.php#browsernativeie and https://msdn.microsoft.com/en-us/library/jj676915%28v=vs.85%29.aspx -->
+  		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		
+		<!-- Next 2 http=equiv headers required to disable caching the Eclipse Browser Widget -->
+		<meta http-equiv="Pragma" content="no-cache">
+  		<meta http-equiv="Expires" content="-1">
+
+		<meta charset="UTF-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<meta name="copyright" content="Copyright IBM Corporation 2014" />
+		<meta name="abstract" content="IBM App Connect Enterprise V11 Tutorial">
+		<meta name="author" content="IBM">
+		<meta name="description" content="IBM App Connect Enterprise V11 Tutorial">
+		<meta name="keywords" content="keywords" > 
+		<meta name="robots" content="index,follow">
+		<meta name="source" content="IBM App Connect Enterprise V11 Tutorial" /> 
+		
+		<title>IBM App Connect Enterprise V11 Tutorial</title>
+
+    	<link rel="stylesheet" href="https://ot4i.github.io/iib-tutorials/css/main.css" />
+		<link rel="stylesheet" href="https://ot4i.github.io/iib-tutorials/css/app.css" />
+    	
+		<script src="https://ot4i.github.io/iib-tutorials/js/json2.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/js2java.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/js2java_steps.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/vendor/modernizr.js"></script>
+	</head>
+<!-- header::End -->
+<!-- body::Start -->
+		<body>
+  	<!-- body content here -->
+	<div class="row">
+	  <div class="small-12 medium-12 large-12 columns">
+	    <p> </p>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="small-9 medium-9 large-9 columns">
+	    <h4 class="title">Using a REST API to manage a set of records <action><button class="small radius button" tabindex="0" id="stepsViewDetails" onclick="viewDetails()"> View Details</button> </action></h4>
+	  </div>
+	  <div class="small-3 medium-3 large-3 columns">
+		<a href="javascript:;" onclick="openExternalBrowser('https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.ace.home.doc/help_home.htm')" class="small right helplink">IBM Knowledge Center</a> 
+	  </div>
+	</div> 
+	<hr>
+	<div class="row">
+		<div class="small-10 medium-10 large-10 columns">
+		<h5> Learn how to use a REST API with a simple example managing a set of records. </h5>
+		</div>
+		<div class="small-2 medium-2 large-2 columns">
+			<button class="small radius button right" tabindex="0" id="backToGallery" onclick="backToGallery()"> Back To Gallery
+			</button>
+		</div>
+	</div>
+	<div class="row">          
+		  <div class="small-12 medium-12 large-12 columns">
+			<ul class="tabs vertical"> 
+				<li class="tab-title tab-title-small active">
+				  <a href="javascript:;" onclick="show('panel21')">Create</a> 
+				</li>
+				<li class="tab-title tab-title-small">
+				  <a href="javascript:;" onclick="show('panel31')">Prepare</a> 
+				</li>
+				<li class="tab-title tab-title-small">
+				  <a href="javascript:;" onclick="show('panel41')">Run</a> 
+				</li>
+			</ul>
+			<!-- editing -->
+			<div class="tabs-content panel-thin-blue vertical"> 
+		    	<div class="content active" id="panel21">
+		    		
+		    		<div class="small-10 medium-10 large-10 columns divider">
+					
+				      	<div class="row content-details">
+					      	<h4>Import the REST API project</h4>
+					        
+						    
+								<p> Click <span class="uicontrol">Import</span> to add a REST API project called <span class="application">CustomerDatabaseV1</span> to your workspace. </p>
+								
+							
+								<p> The <span class="application">CustomerDatabaseV1</span> application consists of a REST API description and other resources, including a number of subflows. You can explore these resources later in the tutorial. The REST API description is opened in the REST API editor. </p>
+								
+							
+								<p> Next, click the <span class="uicontrol">Prepare</span> tab to see the steps that you complete to deploy the REST API. </p>
+								
+							
+						</div>
+						
+						<div class="row content-details">
+							<h4>Find out more</h4>
+							<ul>
+							
+								
+								
+								<li> <a href="javascript:;" onclick="openExternalBrowser('https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bi12016_.htm')" title="Knowledge Center link to  Developing integration solutions by using REST APIs">Developing integration solutions by using REST APIs</a> </li>
+									
+							
+							</ul>
+						</div>
+						
+					</div>
+					
+					<div class="small-2 medium-2 large-2 columns">
+					
+					
+					<h4 class="tkaction"><a href="javascript:;" onclick="importArtifacts(); openResource('CustomerDatabaseV1')"> Import <img class="icon-image" src="https://ot4i.github.io/iib-tutorials/images/icons/ibmdesign/back-right-previous_128-orange.png"></a></h4>
+										
+				    </div>
+					
+		    	</div>
+		    	<div class="content" id="panel31">
+					
+					<div class="small-12 medium-12 large-12 columns">
+					
+						<div class="row content-details">
+						  	<h4>Deploy the REST API</h4>
+						    
+						    
+								<p> Create an integration node by completing the following steps: </p>
+								
+								
+									
+									<ol>
+									
+									
+										<li> Start a console window, and create an integration node by typing the following command:<br><code><span class="cmdname">mqsicreatebroker</span> <span class="varname">TESTNODE</span></code>
+										
+										</li>
+									
+										<li> Start the integration node by typing the following command:<br><code><span class="cmdname">mqsistart</span> <span class="varname">TESTNODE</span></code>
+										
+										</li>
+									
+										<li> Create an integration server associated with the integration node by typing the following command:<br><code><span class="cmdname">mqsicreateexecutiongroup</span> <span class="varname">TESTNODE</span> -e <span class="varname">default</span></code>
+										
+										</li>
+									
+									
+									</ol>
+									
+								
+							
+								<p> Deploy the <span class="application">CustomerDatabaseV1</span> REST API service by completing the following steps: </p>
+								
+								
+									
+									<ol>
+									
+									
+										<li> Drag and drop the <span class="application">CustomerDatabaseV1</span> application on the integration server to deploy the REST API.
+										
+										</li>
+									
+										<li> Check that the application deployed with no errors. Your REST API HTTP endpoints should be up and running, waiting for HTTP REST requests to arrive.
+										
+										</li>
+									
+										<li> Find and record the Base URL of the REST API. The way to discover this information varies slightly on different installed ACE fix pack versions. In recent fix packs, find and select the deployed <span class="application">CustomerDatabaseV1</span> REST API in the <span class="uicontrol">Integration Explorer</span> view of the Toolkit (by default this is shown in the bottom left corner of the Toolkit), then select the <span class="uicontrol">Properties</span> view and find the <span class="uicontrol">REST API Base URL</span> property.<br>Alternatively, right click  your integration node in the <span class="uicontrol">Integration Explorer</span> view of the Toolkit and choose <span class="uicontrol">Start Web User Interface</span>. From the web page that opens, select the correct integration server, select the deployed <span class="application">CustomerDatabaseV1</span> REST API, and find the <span class="uicontrol">REST API Base URL</span> property. For example, the value you are looking for will be something like this: <span class="userinput">http://localhost:7800/customerdb/v1</span>
+										
+										</li>
+									
+									
+									</ol>
+									
+								
+							
+								<p> Next, click the <span class="uicontrol">Run</span> tab to see the steps that you complete to run the REST API. </p>
+								
+							
+						</div>
+						
+						<div class="row content-details">
+							<h4>Find out more</h4>
+							<ul>
+							
+								
+								
+								<li> <a href="javascript:;" onclick="openExternalBrowser('https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bi12016_.htm')" title="Knowledge Center link to  Developing integration solutions by using REST APIs">Developing integration solutions by using REST APIs</a> </li>
+									
+							
+							</ul>
+						</div>
+							
+					</div>
+					
+		    	</div>
+		    	<div class="content" id="panel41">
+		    		
+					<div class="small-12 medium-12 large-12 columns">
+					
+				    	<div class="row content-details">
+					      	<h4>Run the REST API</h4>
+					        
+						    
+								<p> To run the REST API, you need a REST client. If you do not have a dedicated REST client, most browsers, for example Google Chrome or Mozilla Firefox, have REST client extensions or add-ons that you can install in the browser. </p>
+								
+							
+								<p> Call the REST API from a REST client to complete the following tasks: </p>
+								
+							
+								<p> <b>Add a customer</b> </p>
+								
+								
+									
+									<ol>
+									
+									
+										<li> Enter the following URL in your REST client:<br><span class="userinput"><span class="varname">baseURL</span>/customers</span><br> where <span class="varname">baseURL</span> is the base URL of the REST API that you found in the previous section. For example:<br><span class="userinput">http://localhost:7800/customerdb/v1/customers</span>
+										
+										</li>
+									
+										<li> For the input object, specify the customer details in the following format:<br><code>{<br>"firstname" : "John",<br>"lastname" : "Doe",<br>"address" : "123 Main Street"<br>}</code>
+										
+										</li>
+									
+										<li> Select the POST method, and initiate the call. You should see the following response:<br><span class="msgph">A new customer with ID <span class="varname">customerID</span> was successfully added to the database.</span>
+										
+										</li>
+									
+									
+									</ol>
+									
+								
+							
+								<p> <b>List all customers</b> </p>
+								
+								
+									
+									<ol>
+									
+									
+										<li> Enter the following URL in your REST client:<br><span class="userinput"><span class="varname">baseURL</span>/customers</span>
+										
+										</li>
+									
+										<li> Select the GET method, and initiate the call. You should see a list of all the customers in the database.<br>
+										
+										</li>
+									
+									
+									</ol>
+									
+								
+							
+								<p> <b>Get the details for a customer</b> </p>
+								
+								
+									
+									<ol>
+									
+									
+										<li> Enter the following URL in your REST client:<br><span class="userinput"><span class="varname">baseURL</span>/customers/<span class="varname">customerID</span></span><br> where <span class="varname">customerID</span> is the ID of the customer whose details you want to get. For example:<br><span class="userinput">http://localhost:7800/customerdb/v1/customers/3</span>
+										
+										</li>
+									
+										<li> Select the GET method, and initiate the call. The response should contain the details of the customer. For example:<br><span class="msgph">{"id":3,"firstname":"Lyle","lastname":"Longino","address":"3 The Street, The Town"}</span>
+										
+										</li>
+									
+									
+									</ol>
+									
+								
+							
+								<p> <b>Update the details for a customer</b> </p>
+								
+								
+									
+									<ol>
+									
+									
+										<li> Enter the following URL in your REST client:<br><span class="userinput"><span class="varname">baseURL</span>/customers/<span class="varname">customerID</span></span>
+										
+										</li>
+									
+										<li> For the input object, specify the customer details in the following format:<br><code>{<br>"firstname" : "Lyle",<br>"lastname" : "Longino",<br>"address" : "123 New Address, New Town"<br>}</code><br> Note: You must specify all fields in the customer record, not just the field that you want to update.
+										
+										</li>
+									
+										<li> Select the PUT method, and initiate the call. You should see the following response:<br><span class="msgph">An existing customer with ID <span class="varname">customerID</span> was successfully updated in the database.</span>.
+										
+										</li>
+									
+									
+									</ol>
+									
+								
+							
+								<p> <b>Delete a customer</b> </p>
+								
+								
+									
+									<ol>
+									
+									
+										<li> Enter the following URL in your REST client:<br><span class="userinput"><span class="varname">baseURL</span>/customers/<span class="varname">customerID</span></span>
+										
+										</li>
+									
+										<li> For the header, enter <code>Authorization : secr3t</code>.
+										
+										</li>
+									
+										<li> Select the DELETE method, and initiate the call. You should see the following response:<br><span class="msgph">The customer with the specified ID was successfully deleted from the database.</span>.
+										
+										</li>
+									
+									
+									</ol>
+									
+								
+							
+								<p> <b>The following optional steps help you explore and understand the application</b> </p>
+								
+								
+									
+									<ol>
+									
+									
+										<li> In the Toolkit, a REST API is created from a Swagger document. To see the Swagger document that was used to create this REST API, double-click the <span class="filepath">swagger.json</span> file under <span class="application">CustomerDatabaseV1/Other Resources</span> in the <span class="uicontrol">Application Development</span> view. The file is opened in a text editor.
+										
+										</li>
+									
+										<li> When you use the Toolkit to create a REST API from a Swagger document, a REST API description is created. From the <span class="application">CustomerDatabaseV1</span> project, open the REST API Description for the REST API  (if it is not already open). Each URL path/HTTP Method combination is mapped to a logical operation name. From each operation, you can click a link to create a subflow where the operation functionality is defined.
+										
+										</li>
+									
+										<li> Click the <span class="uicontrol">/customers</span> and <span class="uicontrol">/customers/{customerId}</span> headers to expand and collapse the sections that show all the HTTP methods and operations that are defined for each URL path in this REST API.
+										
+										</li>
+									
+										<li> Click the <span class="uicontrol">Open the operation</span> links in the header of each operation to open the subflow that implements the operation.
+										
+										
+											
+											<ul>
+											
+												
+													<li> In the subflow that implements the <span class="resource">addCustomer</span> operation, double-click the Mapping node to see the transformation of the JSON input data using a custom Java class that simulates adding a customer to the registry. Select a Custom Java element in the mapping editor, and look at the Properties view to see the class name and operation that is responsible for performing the task. Click the <span class="uicontrol">Edit</span> button to view the Java code.</li>
+												
+													<li> In the subflow that implements the <span class="resource">getAllCustomers</span> operation, double-click the Compute node to see the ESQL code that handles the message created based on the JSON request object and creates the response message for the JSON response object.</li>
+												
+													<li> In the subflow that implements the <span class="resource">deleteCustomer</span> operation, double-click the Java Compute node to see the code that processes the REST API request and response messages.</li>
+												
+											
+											</ul>
+											
+										
+										</li>
+									
+										<li> In the <span class="uicontrol">Error Handling</span> section, click <span class="uicontrol">Implement the Catch handler</span>, <span class="uicontrol">Implement the Failure handler</span>, or <span class="uicontrol">Implement the Timeout handler</span> to create and open a subflow where you can implement error handling logic.
+										
+										</li>
+									
+									
+									</ol>
+									
+								
+							
+						</div>
+						
+						<div class="row content-details"> 	
+							<h4>Find out more</h4>
+							<ul>
+							
+								
+								
+								<li> <a href="javascript:;" onclick="openExternalBrowser('https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bi12016_.htm')" title="Knowledge Center link to  Developing integration solutions by using REST APIs">Developing integration solutions by using REST APIs</a> </li>
+									
+							
+								
+								
+								<li> <a href="javascript:;" onclick="openExternalBrowser('https://www.ibm.com/support/knowledgecenter/en/SSTTDS_11.0.0/com.ibm.etools.mft.doc/bc28410_.htm')" title="Knowledge Center link to  Manipulating messages in the JSON domain">Manipulating messages in the JSON domain</a> </li>
+									
+							
+							</ul>
+						</div>
+							
+					</div>
+					
+				</div>	
+			</div> <!-- tab-content -->
+		</div> <!-- columns -->
+	  </div> <!-- row --></body>
+		<script src="https://ot4i.github.io/iib-tutorials/js/vendor/jquery.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/vendor/foundation.min.js"></script>
+		<script src="https://ot4i.github.io/iib-tutorials/js/main.js"></script>
+	</body>
+<!-- body::End -->
+
+</html>
