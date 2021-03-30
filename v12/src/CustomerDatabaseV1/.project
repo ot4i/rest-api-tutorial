@@ -7,6 +7,16 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
+			<name>com.ibm.etools.mft.restapi.ui.restApiBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.ibm.etools.mft.json.builder.JSONBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>com.ibm.etools.mft.applib.mbprojectbuilder</name>
 			<arguments>
 			</arguments>
@@ -58,6 +68,16 @@
 		</buildCommand>
 		<buildCommand>
 			<name>com.ibm.etools.mft.pattern.capture.PatternBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.ibm.etools.mft.restapi.ui.restApiDefinitionsBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.ibm.etools.mft.policy.ui.policybuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
